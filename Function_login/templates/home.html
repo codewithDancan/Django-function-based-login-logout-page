@@ -1,0 +1,21 @@
+{% load static %}
+{% block content %}
+<h1>Welcome {{user.username}}</h1>
+<h2>I love you so much</h2>
+<p>You can <a href="reset">Reset Password</a> or
+    <a href='sign-out'>Sign out</a></p>
+<div id='main' class="content">
+    <h1>{% if category %} {{category.name}} {% else %}Products {% endif %}</h1>
+    {% for product in products %}
+    <div class="item">
+        <a href="{{ product.get_absolute_url }}">
+            <img src={% if product.image %}{{ product.image.url}}[% else %}
+                        {% static 'images/no_image.jpg' %}{% endif %}>
+        </a>
+        <a href='{{ product.get_absolute_url }}'>{{product.name}}</a>
+        <br>
+        Ksh.{{product.price}}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
